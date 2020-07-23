@@ -1398,17 +1398,17 @@ class Chef
         @connection_user ||= config[:connection_user] || config[knife_key_for_protocol(:user)]
       end
 
-      def server_name
-        return nil unless server
-
-        if !server.public_dns_name.empty?
-          server.public_dns_name
-        else
-          server.private_ip_address
-        end
-      end
-
-      alias host_descriptor server_name
+      # def server_name
+      #   return nil unless server
+      #
+      #   if !server.public_dns_name.empty?
+      #     server.public_dns_name
+      #   else
+      #     server.private_ip_address
+      #   end
+      # end
+      #
+      # alias host_descriptor server_name
 
       # If we don't specify a security group or security group id, Fog will
       # pick the appropriate default one. In case of a VPC we don't know the
