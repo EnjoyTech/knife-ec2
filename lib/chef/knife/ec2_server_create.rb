@@ -1102,9 +1102,9 @@ class Chef
         print(".") until tcp_test_ssh(hostname, ssh_port) do
           if initial
             initial = false
-            sleep (vpc_mode? ? 40 : 10)
+            sleep (vpc_mode? ? 10 : 10)
           else
-            sleep 10
+            sleep 2
           end
           puts("done")
         end
