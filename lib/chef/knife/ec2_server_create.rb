@@ -159,8 +159,8 @@ class Chef
 
       option :ebs_volume_type,
         long: "--ebs-volume-type TYPE",
-        description: "Possible values are standard (magnetic) | io1 | gp2 | sc1 | st1. Default is gp2",
-        default: "gp2"
+        description: "Possible values are standard (magnetic) | io1 | gp2 | sc1 | st1. Default is gp3",
+        default: "gp3"
 
       option :ebs_provisioned_iops,
         long: "--provisioned-iops IOPS",
@@ -624,8 +624,8 @@ class Chef
           exit 1
         end
 
-        if config[:ebs_volume_type] && ! %w{gp2 io1 standard}.include?(config[:ebs_volume_type])
-          ui.error("--ebs-volume-type must be 'standard' or 'io1' or 'gp2'")
+        if config[:ebs_volume_type] && ! %w{gp2 gp3 io1 standard}.include?(config[:ebs_volume_type])
+          ui.error("--ebs-volume-type must be 'standard' or 'io1' or 'gp2' or 'gp3")
           msg opt_parser
           exit 1
         end
