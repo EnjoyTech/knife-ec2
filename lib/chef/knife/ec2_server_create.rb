@@ -454,7 +454,7 @@ class Chef
           print "#{ui.color("===========================", :magenta)}\n"
 
           if config[:ebs_size]
-            volume_size = ami.block_device_mappings[0].ebs.volume_size
+            volume_size = ami.block_device_mappings.detect{|block| block.device_name == ami.root_device_name}.ebs.volume_size
             if volume_size.to_i < config[:ebs_size].to_i
               volume_too_large_warning = "#{config[:ebs_size]}GB " +
                 "EBS volume size is larger than size set in AMI of " +
@@ -907,11 +907,7 @@ class Chef
         attributes[:ebs_optimized] = !!config[:ebs_optimized]
 
         if ami.root_device_type == "ebs"
-          if config[:ebs_encrypted]
-            ami_map = ami.block_device_mappings[1]
-          else
-            ami_map = ami.block_device_mappings.first
-          end
+          ami_map = ami.block_device_mappings.detect{|block| block.device_name == ami.root_device_name}
 
           ebs_size = begin
                        if config[:ebs_size]
